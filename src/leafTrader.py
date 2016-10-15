@@ -1,0 +1,3 @@
+import quote
+
+quote.main()
