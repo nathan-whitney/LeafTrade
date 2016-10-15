@@ -23,7 +23,4 @@ def main():
             for item in resp:
                 print(item)
 
-
-
-
 main()
