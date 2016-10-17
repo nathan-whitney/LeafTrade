@@ -1,20 +1,14 @@
-import sys
+import os
 import requests
-import json
+import time
 
 
-def main():
-
+def quote(symbols):
     # Parse requested stock tickers
-    print('Enter ticker symbols, separated by a space \n ')
     while 1:
-        user_input = str.upper(raw_input("#"))
-        if user_input == 'Q':
-            exit(1)
-        tick_list = str.split(user_input)
-
+        os.system('cls' if os.name == 'nt' else 'clear')
         # Process tickers
-        for s in tick_list:
+        for s in symbols:
             resp = requests.get('https://api.robinhood.com/quotes/' + s + '/')
             if resp.status_code != 200:
                 # This means something went wrong.
@@ -28,8 +22,12 @@ def main():
             print('Ask volume: ' + str(resp_json['ask_size']))
             print('Bid volume: ' + str(resp_json['bid_size']))
             print('Last updated: ' + str(resp_json['updated_at']))
+        time.sleep(5)
 
 
-
-
-main()
+print('Enter ticker symbols to monitor, separated by a space \n ')
+user_input = str.upper(raw_input("#"))
+if user_input == 'Q':
+    exit(1)
+tick_list = str.split(user_input)
+quote(tick_list)
