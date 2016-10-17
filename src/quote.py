@@ -5,9 +5,9 @@ import json
 
 
 def main():
-    user_input = ""
 
     # Parse requested stock tickers
+    print('Enter ticker symbols, separated by a space \n ')
     while 1:
         user_input = str.upper(raw_input("#"))
         if user_input == 'Q':
