@@ -3,6 +3,7 @@ import requests
 import json
 
 
+
 def main():
     user_input = ""
 
@@ -19,8 +20,17 @@ def main():
             if resp.status_code != 200:
                 # This means something went wrong.
                 print(resp.status_code)
+            resp_json = resp.json()
+            print('\n' + resp_json['symbol'] + '\n')
+            print('Last trade price: ' + resp_json['last_trade_price'])
+            print('Previous close: ' + resp_json['previous_close'])
+            print('Ask price: ' + resp_json['ask_price'])
+            print('Bid price: ' + resp_json['bid_price'])
+            print('Ask volume: ' + str(resp_json['ask_size']))
+            print('Bid volume: ' + str(resp_json['bid_size']))
+            print('Last updated: ' + str(resp_json['updated_at']))
 
-            for item in resp:
-                print(item)
+
+
 
 main()
