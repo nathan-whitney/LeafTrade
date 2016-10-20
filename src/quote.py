@@ -1,6 +1,26 @@
-import sys
 import requests
-import json
+import urllib
+from selenium import webdriver
+from PIL import Image
+from StringIO import StringIO
+
+#scrape chart image from stockta
+def Scrape(s):
+    #phantom driver to avoid opening browser
+    driver=webdriver.PhantomJS()
+    driver.get('http://www.stockta.com/cgi-bin/analysis.pl?symb='+ s +
+                    '&cobrand=&mode=stock')
+    #search for img tag
+    images = driver.find_elements_by_tag_name('img')
+    for image in images:
+        src = image.get_attribute("src")
+        #only take url with ticker name in it (i.e. the chart)
+        if src and s in src:
+            urllib.urlretrieve(src, "chart.png")
+            img = Image.open("chart.png")
+            img.show()
+
+
 
 
 def main():
@@ -28,6 +48,10 @@ def main():
             print('Ask volume: ' + str(resp_json['ask_size']))
             print('Bid volume: ' + str(resp_json['bid_size']))
             print('Last updated: ' + str(resp_json['updated_at']))
+
+            Scrape(s)
+
+
 
 
 
