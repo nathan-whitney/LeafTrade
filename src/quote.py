@@ -6,10 +6,15 @@ from StringIO import StringIO
 
 #scrape chart image from stockta
 def Scrape(s):
+
     #phantom driver to avoid opening browser
     driver=webdriver.PhantomJS()
-    driver.get('http://www.stockta.com/cgi-bin/analysis.pl?symb='+ s +
+    try:
+        driver.get('http://www.stockta.com/cgi-bin/analysis.pl?symb='+ s +
                     '&cobrand=&mode=stock')
+    except AttributeError:
+        pass
+
     #search for img tag
     images = driver.find_elements_by_tag_name('img')
     for image in images:
@@ -24,7 +29,6 @@ def Scrape(s):
 
 
 def main():
-
     # Parse requested stock tickers
     print('Enter ticker symbols, separated by a space \n ')
     while 1:
