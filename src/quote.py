@@ -13,7 +13,7 @@ def Scrape(s):
         driver.get('http://www.stockta.com/cgi-bin/analysis.pl?symb='+ s +
                     '&cobrand=&mode=stock')
     except AttributeError:
-        pass
+        print('AttributeError: is the phantomJS executable in your PATH?')
 
     #search for img tag
     images = driver.find_elements_by_tag_name('img')
