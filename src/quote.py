@@ -1,29 +1,36 @@
 import requests
 import urllib
 from selenium import webdriver
+import selenium
 from PIL import Image
 from StringIO import StringIO
 
 #scrape chart image from stockta
 def Scrape(s):
 
-    #phantom driver to avoid opening browser
-    driver=webdriver.PhantomJS()
     try:
-        driver.get('http://www.stockta.com/cgi-bin/analysis.pl?symb='+ s +
-                    '&cobrand=&mode=stock')
-    except AttributeError:
-        print('AttributeError: is the phantomJS executable in your PATH?')
+        #phantom driver to avoid opening browser
 
-    #search for img tag
-    images = driver.find_elements_by_tag_name('img')
-    for image in images:
-        src = image.get_attribute("src")
-        #only take url with ticker name in it (i.e. the chart)
-        if src and s in src:
-            urllib.urlretrieve(src, "chart.png")
-            img = Image.open("chart.png")
-            img.show()
+        driver=webdriver.PhantomJS()
+
+
+        try:
+            driver.get('http://www.stockta.com/cgi-bin/analysis.pl?symb='+ s +
+                    '&cobrand=&mode=stock')
+        except AttributeError:
+            print('AttributeError: is the phantomJS executable in your PATH?')
+
+        #search for img tag
+        images = driver.find_elements_by_tag_name('img')
+        for image in images:
+            src = image.get_attribute("src")
+            #only take url with ticker name in it (i.e. the chart)
+            if src and s in src:
+                urllib.urlretrieve(src, "chart.png")
+                img = Image.open("chart.png")
+                img.show()
+    except selenium.common.exceptions.WebDriverException:
+        print('Chart cannot be displayed: is the phantomJS executable in your PATH?')
 
 
 
@@ -42,7 +49,8 @@ def main():
             resp = requests.get('https://api.robinhood.com/quotes/' + s + '/')
             if resp.status_code != 200:
                 # This means something went wrong.
-                print(resp.status_code)
+                print('error ' + str(resp.status_code))
+                exit(resp.status_code)
             resp_json = resp.json()
             print('\n' + resp_json['symbol'] + '\n')
             print('Last trade price: ' + resp_json['last_trade_price'])
