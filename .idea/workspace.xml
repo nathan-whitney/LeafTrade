@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="1f981023-03d9-4b2c-9570-5cf7d042e623" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ghostdriver.log" afterPath="$PROJECT_DIR$/src/ghostdriver.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/leafTrader.py" afterPath="$PROJECT_DIR$/src/leafTrader.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/quote.py" afterPath="$PROJECT_DIR$/src/quote.py" />
     </list>
     <ignored path="LeafTrade.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -74,6 +71,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="Nathan Whitney &lt;nwslap12@gmail.com&gt;" />
+      </list>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
@@ -435,6 +437,14 @@
       <option name="presentableId" value="Default" />
       <updated>1476484188557</updated>
     </task>
+    <task id="LOCAL-00001" summary="handling errors more gracefully">
+      <created>1485640690648</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1485640690648</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -471,6 +481,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="handling errors more gracefully" />
+    <option name="LAST_COMMIT_MESSAGE" value="handling errors more gracefully" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
