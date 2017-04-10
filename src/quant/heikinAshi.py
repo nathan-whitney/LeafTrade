@@ -42,7 +42,7 @@ def myTradingSystem(DATE, OPEN, HIGH, LOW, CLOSE, settings):
 
 def mySettings():
     settings = {}
-    settings['markets']=['CASH','AAPL','ABBV','ABT','ACN','AEP','AIG','ALL',
+    settings['markets']=['AAPL','ABBV','ABT','ACN','AEP','AIG','ALL',
     'AMGN','AMZN','APA','APC','AXP','BA','BAC','BAX','BK','BMY','BRKB','C',
     'CAT','CL','CMCSA','COF','COP','COST','CSCO','CVS','CVX','DD','DIS','DOW',
     'DVN','EBAY','EMC','EMR','EXC','F','FB','FCX','FDX','FOXA','GD','GE',
