@@ -1,4 +1,7 @@
-import subprocess
+"""
+The main process for the program
+Return here after exiting a subprocess
+"""
 
 print("Enter desired function, or !help\nQ to quit")
 while 1:
@@ -11,18 +14,12 @@ while 1:
               '    -WATCH\n'
               '    -ANALYZE\n')
     elif user_input == 'QUOTE':
-        retval = subprocess.call(" python quote.py", shell=True)
-        if retval != 1:
-            exit(retval)
-        else:
-            print("Enter desired function, or !help\nQ to quit")
+        import quote
+        quote.__main__()
 
     elif user_input == 'WATCH':
-        retval = subprocess.call(" python watch.py", shell=True)
-        if retval != 1:
-            exit(retval)
-        else:
-            print("Enter desired function, or !help\nQ to quit")
+        import watch
+        watch.__main__()
 
     else:
         print("Invalid command")

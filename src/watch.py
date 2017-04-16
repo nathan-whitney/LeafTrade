@@ -3,7 +3,12 @@ import requests
 import time
 
 
-def quote(symbols):
+def quoteloop(symbols):
+    """
+    loop to get quotes
+    :param symbols: stocks to quote
+    :return: repeatedly quotes prices of stocks
+    """
     # Parse requested stock tickers
     while 1:
         os.system('cls' if os.name == 'nt' else 'clear')
@@ -24,10 +29,14 @@ def quote(symbols):
             print('Last updated: ' + str(resp_json['updated_at']))
         time.sleep(5)
 
-
-print('Enter ticker symbols to monitor, separated by a space \n ')
-user_input = str.upper(raw_input("#"))
-if user_input == 'Q':
-    exit(1)
-tick_list = str.split(user_input)
-quote(tick_list)
+def __main__():
+    """
+    Main process for watching
+    :return: N/A
+    """
+    print('Enter ticker symbols to monitor, separated by a space. Q to quit \n ')
+    user_input = str.upper(raw_input("#"))
+    if user_input == 'Q':
+        import leafTrader
+    tick_list = str.split(user_input)
+    quoteloop(tick_list)

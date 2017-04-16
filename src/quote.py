@@ -5,13 +5,17 @@ import selenium
 from PIL import Image
 from StringIO import StringIO
 
-#scrape chart image from stockta
-def Scrape(s):
 
+def Scrape(s):
+    """
+    scrape stock chart from stockta
+    :param s: symbol to check
+    :return: displays chart of symbol
+    """
     try:
         #phantom driver to avoid opening browser
 
-        driver=webdriver.PhantomJS()
+        driver=webdriver.PhantomJS(executable_path=r'/home/nathan/PycharmProjects/LeafTrade/src/driver/bin/phantomjs')
 
 
         try:
@@ -35,13 +39,17 @@ def Scrape(s):
 
 
 
-def main():
+def __main__():
+    """
+    Initiate quote function
+    :return: price quote for given stock
+    """
     # Parse requested stock tickers
     print('Enter ticker symbols, separated by a space \n ')
     while 1:
         user_input = str.upper(raw_input("#"))
         if user_input == 'Q':
-            exit(1)
+            import leafTrader
         tick_list = str.split(user_input)
 
         # Process tickers
@@ -68,4 +76,3 @@ def main():
 
 
 
-main()
