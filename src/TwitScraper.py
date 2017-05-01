@@ -1,12 +1,20 @@
 import requests
 
 class TwitScraper:
+    """
+    A class to gather data from stocktwits for a crowd-sourced information system
+    """
 
     def __init__(self):
         self.messages = dict()
         self.trending = list()
 
     def ScrapeMessages(self, symbol):
+        """
+        Get the most recent messages for a symbol
+        :param symbol: symbol to check
+        :return: list of messages regarding this symbol
+        """
         resp = requests.get('https://api.stocktwits.com/api/2/streams/symbol/' + symbol + '.json')
         if resp.status_code != 200:
             # This means something went wrong.
@@ -17,6 +25,10 @@ class TwitScraper:
         return self.messages
 
     def ScrapeTrending(self):
+        """
+        Get the currently trending symbols
+        :return: List of trending symbols
+        """
         resp = requests.get('https://api.stocktwits.com/api/2/streams/trending.json')
         if resp.status_code != 200:
             # This means something went wrong.

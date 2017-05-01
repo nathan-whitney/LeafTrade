@@ -1,5 +1,6 @@
 import jsonpickle
 import string
+import io
 
 class SentimentAnalyzer:
     """
@@ -21,9 +22,9 @@ class SentimentAnalyzer:
 #       Proceedings of the ACM SIGKDD International Conference on Knowledge
 #       Discovery and Data Mining (KDD-2004), Aug 22-25, 2004, Seattle,
 #       Washington, USA
-        posfile = open('/home/nathan/PycharmProjects/LeafTrade/src/positivewords.txt', 'r')
+        posfile = io.open('/home/nathan/PycharmProjects/LeafTrade/src/positivewords.txt', 'r', encoding='utf8')
         self.positive_words = [word.strip() for word in posfile.readlines()]
-        negfile = open('/home/nathan/PycharmProjects/LeafTrade/src/negativewords.txt')
+        negfile = io.open('/home/nathan/PycharmProjects/LeafTrade/src/negativewords.txt', encoding='utf8')
         self.negative_words = [word.strip() for word in negfile.readlines()]
 
     def AnalyzeSentiment(self, message):
@@ -35,17 +36,29 @@ class SentimentAnalyzer:
         """
         sentiment = 0
         message_words = string.split(message.lower())
+        previous_word = ""
         for word in message_words:
+            if '$' in word:
+                continue
             if self.custom_dict.__contains__(word):
                 sentiment += self.custom_dict[word]
             else:
                 self.custom_dict[word] = 0
                 if self.positive_words.__contains__(word):
-                    sentiment += 1
-                    self.custom_dict[word] += 1
+                    if string.upper(previous_word) == "NOT":
+                        sentiment -= 1
+                        self.custom_dict[word] -= 1
+                    else:
+                        sentiment += 1
+                        self.custom_dict[word] += 1
                 if self.negative_words.__contains__(word):
-                    sentiment -= 1
-                    self.custom_dict[word] -= 1
+                    if string.upper(previous_word) == "NOT":
+                        sentiment += 1
+                        self.custom_dict[word] += 1
+                    else:
+                        sentiment -= 1
+                        self.custom_dict[word] -= 1
+            previous_word = word
 
         for word in message_words:
             if 'bear' in word:
@@ -75,9 +88,10 @@ class SentimentAnalyzer:
         :return: N/A
         """
         for word in message_words:
-            if isPositive:
-                self.custom_dict[word] += 1
-            else:
-                self.custom_dict[word] -= 1
+            if '$' not in word:
+                if isPositive:
+                    self.custom_dict[word] += 1
+                else:
+                    self.custom_dict[word] -= 1
 
 

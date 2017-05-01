@@ -1,10 +1,10 @@
-import unittest
-from TwitScraper import TwitScraper
-from TextAnalysis import SentimentAnalyzer
-from subprocess import Popen, PIPE
 import time
-import subprocess
-import os
+import unittest
+from subprocess import Popen, PIPE
+
+from SelectionAlgo import Selector
+from TextAnalysis import SentimentAnalyzer
+from TwitScraper import TwitScraper
 
 
 class TestFunctions(unittest.TestCase):
@@ -45,6 +45,8 @@ class TestFunctions(unittest.TestCase):
         ts = TwitScraper()
         ts.ScrapeMessages('AAPL')
         self.assertTrue(ts.messages['AAPL'] is not None)
+        # ts.ScrapeMessages('ZZZZZZZZ')
+
 
     def test_trending_scrape(self):
         ts = TwitScraper()
@@ -54,14 +56,27 @@ class TestFunctions(unittest.TestCase):
     def test_sentiment_analysis(self):
         sa = SentimentAnalyzer()
         self.assertTrue(sa.positive_words[1] == 'abound')
-        self.assertTrue(sa.AnalyzeSentiment('bullish bearish', 'MSFT')==0)
-        self.assertTrue(sa.AnalyzeSentiment('gem bullish', 'AAPL')==4)
-        self.assertTrue(sa.AnalyzeSentiment('bullish is bearish', 'AMRS')==1)
-        self.assertTrue(sa.AnalyzeSentiment('is', 'GOOG')==0)
-        sa.AnalyzeSentiment('is good bullish word gem', 'GOOG')
-        self.assertTrue(sa.AnalyzeSentiment('is', 'GOOG')==1)
-        self.assertTrue(sa.ratings_dict['AAPL']=='Watch')
-        sa.AnalyzeSentiment('bad evil mean terrifying', 'AAPL')
+        # self.assertTrue(sa.AnalyzeSentiment('bullish bearish', 'MSFT')==0)
+        # self.assertTrue(sa.AnalyzeSentiment('gem bullish', 'AAPL')==4)
+        # self.assertTrue(sa.AnalyzeSentiment('bullish is bearish', 'AMRS')==1)
+        # self.assertTrue(sa.AnalyzeSentiment('is', 'GOOG')==0)
+        sa.AnalyzeSentiment('is good bullish word gem')
+        # self.assertTrue(sa.AnalyzeSentiment('is', 'GOOG')==1)
+        # self.assertTrue(sa.ratings_dict['AAPL']=='Watch')
+        sa.AnalyzeSentiment('bad evil mean terrifying')
+
+    def test_selector(self):
+        symbolslist = ['UVXY', 'MITK', 'MCD', 'CSX', 'OCLR', 'ZZZZZZ', 'AMRS']
+
+        sel = Selector(symbolslist)
+        print sel.select_stocks()
+
+    def test_reddit(self):
+        symbolslist = ['UVXY', 'MITK', 'MCD', 'CSX', 'OCLR', 'ZZZZZZ', 'AMRS']
+
+        sel = Selector(symbolslist)
+        sel.parse_reddit()
+
 
 
 

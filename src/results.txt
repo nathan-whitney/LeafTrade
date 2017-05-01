@@ -1,0 +1,20 @@
+
+AMRS
+
+Last trade price: 0.5248
+Previous close: 0.5411
+Ask price: 0.5470
+Bid price: 0.5252
+Ask volume: 7500
+Bid volume: 200
+Last updated: 2017-05-01T20:21:36Z
+
+MSFT
+
+Last trade price: 69.4100
+Previous close: 68.4600
+Ask price: 69.6500
+Bid price: 69.5600
+Ask volume: 300
+Bid volume: 200
+Last updated: 2017-05-01T20:36:41Z
